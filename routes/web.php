@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ServicoController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PanelController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Livewire\Admin\Animais\CreateRaca;
 use App\Http\Livewire\Admin\Animais\EditRaca;
@@ -50,6 +51,9 @@ Route::post('/cadastro', [PessoaController::class, 'store'])->name('store.cadast
 // Route::impersonate();
 // END Rotas públicas
 
+// Rotas painel documentos
+Route::get('/documentos', [PanelController::class, 'index']);
+Route::get('/documentos/{filename}', [PanelController::class, 'show'])->name('documentos.show');
 
 // Rotas para o cidadão
 Route::prefix('/cidadao')->middleware('auth')->group(function () {
@@ -60,8 +64,6 @@ Route::prefix('/cidadao')->middleware('auth')->group(function () {
         return view('pessoas.dashboard');
     })->name('dashboard');
 });
-
-
 
 // Rotas para as ongs
 
