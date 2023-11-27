@@ -10,8 +10,8 @@ class Documento extends Model
     use HasFactory;
 
     protected $fillable = [
+        'arquivo', 
         'nome_arquivo', 
-        'descricao', 
         'path',
     ];
 }

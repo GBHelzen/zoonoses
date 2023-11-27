@@ -21,15 +21,15 @@ class PanelController extends Controller
 
     // Salvar os documentos no banco de dados
     foreach ($pdfs as $pdf) {
-        $nomeArquivo = pathinfo($pdf, PATHINFO_FILENAME);
-        $descricao = 'Descrição do documento';
+        $Arquivo = pathinfo($pdf, PATHINFO_FILENAME);
+        $nome_arquivo = 'Nome do Documento';
 
         // Verifica se o documento já existe no banco de dados
-        if (!Documento::where('nome_arquivo', $nomeArquivo)->exists()) {
+        if (!Documento::where('arquivo', $Arquivo)->exists()) {
             // Salva no banco de dados
             Documento::create([
-                'nome_arquivo' => $nomeArquivo,
-                'descricao' => $descricao,
+                'arquivo' => $Arquivo,
+                'nome_arquivo' => $nome_arquivo,
                 'path' => basename($pdf),
             ]);
         }
@@ -44,7 +44,7 @@ class PanelController extends Controller
     public function show($filename)
     {
         // Lógica para exibir um PDF específico
-        $documento = Documento::where('nome_arquivo', $filename . '.pdf')->first();
+        $documento = Documento::where('arquivo', $filename . '.pdf')->first();
 
         if ($documento) {
             $path = public_path($documento->path);
