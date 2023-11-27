@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Painel de Documentos</title>
+    <title>Lista de Documentos</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -50,11 +50,11 @@
                 </div>
             </div>
 
-                @foreach ($pdfs as $pdf)
+                @foreach ($documentos as $documento)
                         <div class="bg-white  flex items-center p-2 rounded-xl shadow border">
                             {{-- Ícone de Anexo com Link --}}
                             <div class="flex items-center space-x-4">
-                                <a href="/docs/{{ basename($pdf) }}" target="blank">
+                                <a href="/docs/{{ $documento->path }}" target="blank">
                                     <svg class="flex-shrink-0 h-5 w-5 text-gray-400"
                                         x-description="Heroicon name: solid/paper-clip" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -67,8 +67,8 @@
                             {{-- Texto com Link --}}
                             <div class="flex-grow p-3">
                                 <div class="font-semibold text-gray-700">
-                                    <a href="/docs/{{ basename($pdf) }}"
-                                        target="blank">{{ basename($pdf) }}</a>
+                                    <a href="/docs/{{ $documento->path }}"
+                                        target="blank">{{ $documento->nome_arquivo }}</a>
                                 </div>
                                 {{-- <div class="text-sm text-gray-500">
                                         You: Thanks, sounds good! . 8hr
@@ -76,7 +76,7 @@
                             </div>
                             {{-- Ícone Setinha com Link --}}
                             <div class="p-2">
-                                <a href="/docs/{{ basename($pdf) }}" target="blank">
+                                <a href="/docs/{{ $documento->path }}" target="blank">
                                     <svg class="stroke-current text-gray-500" fill="none" height="24" stroke="currentColor"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                                         width="24" xmlns="http://www.w3.org/2000/svg">

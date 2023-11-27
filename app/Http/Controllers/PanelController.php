@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Documento;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,14 +19,42 @@ class PanelController extends Controller
         return pathinfo($file, PATHINFO_EXTENSION) === 'pdf';
     });
 
-    return view('documentos.index', compact('pdfs'));
+    // Salvar os documentos no banco de dados
+    foreach ($pdfs as $pdf) {
+        $nomeArquivo = pathinfo($pdf, PATHINFO_FILENAME);
+        $descricao = 'Descrição do documento';
+
+        // Verifica se o documento já existe no banco de dados
+        if (!Documento::where('nome_arquivo', $nomeArquivo)->exists()) {
+            // Salva no banco de dados
+            Documento::create([
+                'nome_arquivo' => $nomeArquivo,
+                'descricao' => $descricao,
+                'path' => basename($pdf),
+            ]);
+        }
+    }
+
+    // Recuperar documentos do banco de dados
+    $documentos = Documento::all();
+
+    return view('documentos.index', compact('documentos'));
 }
 
     public function show($filename)
     {
         // Lógica para exibir um PDF específico
-        $path = Storage::path('docs/' . $filename);
+        $documento = Documento::where('nome_arquivo', $filename . '.pdf')->first();
 
-        return response()->file($path);
+        if ($documento) {
+            $path = public_path($documento->path);
+
+            // Verifica se o arquivo existe antes de tentar retorná-lo
+            if (file_exists($path)) {
+                return response()->file($path);
+            }
+        }
+
+        abort(404);
     }
 }
