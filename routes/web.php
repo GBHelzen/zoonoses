@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\ServicoController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\PanelController;
+use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Livewire\Admin\Animais\CreateRaca;
 use App\Http\Livewire\Admin\Animais\EditRaca;
@@ -11,6 +11,7 @@ use App\Http\Livewire\Admin\Animais\ShowAnimal;
 use App\Http\Livewire\Admin\ClinicaVeterinaria\CreateClinica;
 use App\Http\Livewire\Admin\ClinicaVeterinaria\EditClinica;
 use App\Http\Livewire\Admin\ClinicaVeterinaria\IndexClinicas;
+use App\Http\Livewire\Admin\Documentos\EditDocumento;
 use App\Http\Livewire\Admin\Endereco\ShowEnderecoPessoas;
 use App\Http\Livewire\Admin\Logs\Index;
 use App\Http\Livewire\Admin\Logs\Show;
@@ -52,8 +53,11 @@ Route::post('/cadastro', [PessoaController::class, 'store'])->name('store.cadast
 // END Rotas públicas
 
 // Rotas painel documentos
-Route::get('/documentos', [PanelController::class, 'index']);
-Route::get('/documentos/{filename}', [PanelController::class, 'show'])->name('documentos.show');
+Route::get('/admin/documentos', [DocumentoController::class, 'index']);
+Route::get('/admin/documentos/create', [DocumentoController::class, 'create'])->name('documentos.create');
+Route::post('/admin/documentos', [DocumentoController::class, 'store'])->name('documentos.store');
+Route::get('/documentos/{filename}', [DocumentoController::class, 'show'])->name('documentos.show');
+Route::get('/admin/documentos/{filename}/edit', EditDocumento::class)->name('documentos.edit');
 
 // Rotas para o cidadão
 Route::prefix('/cidadao')->middleware('auth')->group(function () {

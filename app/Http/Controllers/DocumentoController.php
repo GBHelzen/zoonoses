@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class PanelController extends Controller
+class DocumentoController extends Controller
 {
     public function index()
 {
@@ -38,23 +38,34 @@ class PanelController extends Controller
     // Recuperar documentos do banco de dados
     $documentos = Documento::all();
 
-    return view('documentos.index', compact('documentos'));
+    return view('admin.documentos.index-documentos', compact('documentos'));
+}
+    public function create() 
+{
+    return view('admin.documentos.create');
+}
+    public function store(Request $request)
+{
+    $data = $request->all();
+    $data['path'] = '/public/docs';
+
+    Documento::create($data);
 }
 
-    public function show($filename)
-    {
-        // Lógica para exibir um PDF específico
-        $documento = Documento::where('arquivo', $filename . '.pdf')->first();
+    //  public function show($filename)
+    //  {
+    //      // Lógica para exibir um PDF específico
+    //      $documento = Documento::where('arquivo', $filename . '.pdf')->first();
 
-        if ($documento) {
-            $path = public_path($documento->path);
+    //      if ($documento) {
+    //          $path = public_path($documento->path);
 
-            // Verifica se o arquivo existe antes de tentar retorná-lo
-            if (file_exists($path)) {
-                return response()->file($path);
-            }
-        }
+    //          // Verifica se o arquivo existe antes de tentar retorná-lo
+    //          if (file_exists($path)) {
+    //              return response()->file($path);
+    //          }
+    //      }
 
-        abort(404);
-    }
+    //      abort(404);
+    //  }
 }
