@@ -42,7 +42,7 @@ class DocumentoController extends Controller
 }
     public function create() 
 {
-    return view('admin.documentos.create');
+    return view('admin.documentos.create-documento');
 }
     public function store(Request $request)
 {
@@ -50,6 +50,8 @@ class DocumentoController extends Controller
     $data['path'] = '/public/docs';
 
     Documento::create($data);
+
+    return redirect()->route('documentos.index');
 }
 
     //  public function show($filename)

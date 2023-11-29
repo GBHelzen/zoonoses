@@ -1,4 +1,3 @@
-<x-app-layout>
     {{-- Nothing in the world is as soft and yielding as water. --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -21,4 +20,3 @@
         </div>
 
     </div>
-</x-app-layout>

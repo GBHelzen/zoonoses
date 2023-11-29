@@ -38,6 +38,12 @@
                         {{ __('Raças') }}
                     </x-nav-link>
                 </div>
+                <!-- Documentos -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('documentos.index')" :active="request()->routeIs('documentos.index', 'documentos.create', 'documentos.edit')">
+                        {{ __('Documentos') }}
+                    </x-nav-link>
+                </div>
                 @endcan
 
                 @can('isSuperAdmin')

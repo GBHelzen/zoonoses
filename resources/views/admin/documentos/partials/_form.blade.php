@@ -27,7 +27,7 @@
                             class=" ml-1 text-sm text-red-700">*</span>
                     </div>
 
-                    <x-input wire:model="documento.arquivo" id="arquivo" class="input-file" type="file" accept="application/pdf"
+                    <x-input wire:model="documento.arquivo" id="arquivo" class="input-file" type="file"
                         name="arquivo" :value="old('arquivo')" />
                     @error('documento.arquivo') <span class="text-red-700">{{ $message }}</span>
                     @enderror

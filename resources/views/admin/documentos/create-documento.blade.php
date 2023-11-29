@@ -1,4 +1,3 @@
-<x-app-layout>
     {{-- The Master doesn't talk, he acts. --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -14,13 +13,10 @@
         <div class="md:grid md:grid-cols-3 md:gap-6">
 
             <div class="mt-5 md:mt-0 md:col-span-3">
-                <form action="{{ route('documentos.store') }}" method="POST">
-                    @csrf()
+                <form wire:submit.prevent="store" method="POST">
                     @include('admin.documentos.partials._form')
                 </form>
         </div>
 
     </div>
 </div>
-
-</x-app-layout>

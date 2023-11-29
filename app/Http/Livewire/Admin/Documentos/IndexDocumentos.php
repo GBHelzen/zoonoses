@@ -31,9 +31,9 @@ class IndexDocumentos extends Component
     public function render()
     {
         return view(
-            'admin.documentos.index',
+            'admin.documentos.index-documentos',
             [
-                'documentos' => Documento::where('nome_arquivo' || 'arquivo', 'ilike', '%' . $this->search .  '%')
+                'documentos' => Documento::where('nome_arquivo', 'ilike', '%' . $this->search .  '%')
                     ->orderBy('nome_arquivo', 'asc')->paginate(10),
             ]
         )->layout('layouts.admin');
