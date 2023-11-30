@@ -25,6 +25,8 @@ class CreateDocumento extends Component
     {
         $this->validate();
 
+        //dd($this->documento['path'] = basename($this->documento->arquivo . '.pdf'));
+
         DB::transaction(function () {
             $this->documento->save();
         });
